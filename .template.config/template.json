@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Stefan Bogdanović",
+  "classifications": [
+    "Web",
+    "API",
+    "FastEndpoints"
+  ],
+  "identity": "API",
+  "name": "FastEndpoints API",
+  "shortName": "fastendpoints",
+  "sourceName": "TemplateFastEndpoints.API",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "UseCookieAuth": {
+      "description": "Adds Cookie Authentication.",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false"
+    },
+    "UseSerilog": {
+      "description": "Adds Serilog.",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false"
+    },
+    "UseDocker": {
+      "description": "Adds Docker support.",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
+    },
+    "Tests": {
+      "description": "Adds an integration test project.",
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "FastEndpointsTemplate.nuspec",
+        "FastEndpointsTemplate.sln",
+        "**/*.lock.json",
+        "LICENSE",
+        "README.md",
+        ".DS_Store",
+        ".github/**"
+      ],
+      "modifiers": [
+        {
+          "condition": "(!Tests)",
+          "exclude": [
+            "./tests/TemplateFastEndpoints.API.E2E.Tests/**/*"
+          ]
+        },
+        {
+          "condition": "(!UseDocker)",
+          "exclude": [
+            "./src/TemplateFastEndpoints.API/Dockerfile",
+            "./src/TemplateFastEndpoints.API/.dockerignore"
+          ]
+        }
+      ]
+    }
+  ]
+}
